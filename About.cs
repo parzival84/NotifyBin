@@ -15,11 +15,21 @@ namespace TrashBin
 		public About()
 		{
 			InitializeComponent();
-			Descriptionlabel.Text = "Notify Bin v1.11\nRecycle bin for your Microsoft Windows system tray area. \n © 2021 by Realag \n github.com/Rea1ag/TrashBin ";
+			Descriptionlabel.Text = "TrashBin\nRecycle bin for your Microsoft Windows system tray area. \n © 2021 by Aaron Davis \n github.com/parzival84/TrashBin ";
 		}
 		private void Closebutton_Click(object sender, EventArgs e)
 		{
 			this.Close();
 		}
-	}
+
+        private void Descriptionlabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Headlinelabel_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
 }
