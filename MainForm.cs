@@ -10,15 +10,13 @@ namespace NotifyBin
 {
 	public partial class MainForm : Form
 	{
-		//Автозапуск приложения
 		readonly RegistryKey myKey = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
-		//Папка в реестре где хранятся параметры программы
 		readonly RegistryKey key = Registry.CurrentUser.CreateSubKey(@"Software\NotifyBin");
 		enum RecycleFlags : uint
 		{
-			SHRB_NOCONFIRMATION = 0x00000001, // Don't ask confirmation
-			SHRB_NOPROGRESSUI = 0x00000002, // Don't show any windows dialog
-			SHRB_NOSOUND = 0x00000004 // Don't make sound, ninja mode enabled :v
+			SHRB_NOCONFIRMATION = 0x00000001,
+			SHRB_NOPROGRESSUI = 0x00000002,
+			SHRB_NOSOUND = 0x00000004
 		}
 		[DllImport("Shell32.dll", CharSet = CharSet.Unicode)]
 		static extern uint SHEmptyRecycleBin(IntPtr hwnd, string pszRootPath, RecycleFlags dwFlags);
@@ -27,7 +25,7 @@ namespace NotifyBin
 		{
 			InitializeComponent();
 		}
-		//Начало - Не показывать программу в Alt-tab
+
 		[DllImport("user32.dll")]
 		private static extern int SetWindowLong(IntPtr window, int index, int value);
 
@@ -42,45 +40,43 @@ namespace NotifyBin
 			SetWindowLong(Handle, GWL_EXSTYLE, GetWindowLong(Handle,
 				GWL_EXSTYLE) | WS_EX_TOOLWINDOW);
 		}
-		//Конец - Не показывать программу в Alt-tab
-		//Очистка корзины
+
 		private void clearToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			try
 			{
-				uint IsSuccess = SHEmptyRecycleBin(IntPtr.Zero, null, RecycleFlags.SHRB_NOCONFIRMATION);//Очистка корзины
+				uint IsSuccess = SHEmptyRecycleBin(IntPtr.Zero, null, RecycleFlags.SHRB_NOCONFIRMATION);
 				GetNotifyData();
 				notify.BalloonTipTitle = "Notify Bin";
-				notify.BalloonTipText = Language.Translate("BinClear"); //"Recycle Bin is successfully cleared!";
+				notify.BalloonTipText = Language.Translate("BinClear");
 				notify.BalloonTipIcon = ToolTipIcon.Info;
 				notify.ShowBalloonTip(1000);
 				
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 				notify.BalloonTipTitle = "Notify Bin";
-				notify.BalloonTipText = Language.Translate("BinNotClear"); //"Recycle Bin has not been cleared!";
+				notify.BalloonTipText = Language.Translate("BinNotClear");
 				notify.BalloonTipIcon = ToolTipIcon.Error;
 				notify.ShowBalloonTip(1000);
 
 			}
 		}
-		//Открываем папку корзины
+
 		private void openToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			Process.Start("explorer", "shell:RecycleBinFolder"); // Открыть корзину
+			Process.Start("explorer", "shell:RecycleBinFolder");
 		}
 
 		private void MainForm_Load(object sender, EventArgs e)
 		{
 			GetRegistryData();
-			GetLanguage(); //Надо пробовать
+			GetLanguage();
 			GetNotifyData();
 			timer.Start();
-			HideFromAltTab(this.Handle);//Запуск метода скрывает программу из alt-tab
+			HideFromAltTab(this.Handle);
 		}
 
-		//Локализация
 		private void GetLanguage()
 		{
 			Language.lang = key.GetValue("Language").ToString();
@@ -88,16 +84,15 @@ namespace NotifyBin
 
 		}
 
-		//Раз в минуту обновляем, информацию о корзине
 		private void timer_Tick(object sender, EventArgs e)
 		{
 			GetNotifyData();
 		}
-		//Размер и количество файлов при наведении на значек в строке уведомлений
+
 		private void GetNotifyData()
 		{
 			GetBinData databin = new GetBinData();
-			//Сколько сейчас данных в корзине
+
 			databin.GetSize();
 
 			if (databin._file_sizeMB == 0 && databin._num_itemsMB == 0)
@@ -106,7 +101,7 @@ namespace NotifyBin
 			}
 			else { clearToolStripMenuItem.Enabled = true; }
 			notify.Text = "Notify Bin v1.11\n\n" + databin._num_items + "\n" + databin._file_size;
-			//Сколько всего данных в корзине
+
 			double sum = databin.GetMaxSize();
 			int iconpersent = 0;
 			if (databin._file_sizeMB >= ((sum / 100) * 75) || databin._file_sizeMB <= ((sum / 100) * 75))
@@ -139,26 +134,26 @@ namespace NotifyBin
 			switch (iconpersent)
 			{
 				case 0:
-					notify.Icon = Resources.Bin0;//Иконка OK
+					notify.Icon = Resources.Bin0;
 					break;
 				case 25:
-					notify.Icon = Resources.Bin25;//Иконка 25%
+					notify.Icon = Resources.Bin25;
 					break;
 				case 50:
-					notify.Icon = Resources.Bin50;//Иконка 50%
+					notify.Icon = Resources.Bin50;
 					break;
 				case 75:
-					notify.Icon = Resources.Bin75;//Иконка 75%
+					notify.Icon = Resources.Bin75;
 					break;
 				case 100:
-					notify.Icon = Resources.Bin100;//Иконка 100%
+					notify.Icon = Resources.Bin100;
 					break;
 				default:
 					notify.Icon = Resources.Bin0;
 					break;
 			}
 		}
-		//Все настройки записываються в реестр
+
 		private void GetRegistryData()
 		{
 			try
@@ -181,8 +176,7 @@ namespace NotifyBin
 			{
 				key.SetValue("Autostart", 0);
 			}
-			//Узнаем действие на дабл клик по иконке из реестра, если в реестре пусто создаем.
-			//По умолчанию действие Открыть корзину
+
 			try
 			{
 				var value = key.GetValue("DoubleClickAction");
@@ -207,7 +201,7 @@ namespace NotifyBin
 			{
 				key.SetValue("DoubleClickAction", "Open");
 			}
-			//Определяем локализацию
+
 			try
 			{
 				var value = key.GetValue("Language");
@@ -233,7 +227,7 @@ namespace NotifyBin
 				key.SetValue("Language", "ENG");
 			}
 		}
-		//Включить автозапуск при старте Windows
+
 		private void onToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			try
@@ -241,7 +235,7 @@ namespace NotifyBin
 				if (myKey.GetValue("NotifyBin").ToString() != Application.ExecutablePath)
 					myKey.SetValue("NotifyBin", Application.ExecutablePath);
 			}
-			catch (NullReferenceException ex)
+			catch (NullReferenceException)
 			{
 				myKey.SetValue("NotifyBin", Application.ExecutablePath);
 			}
@@ -249,7 +243,7 @@ namespace NotifyBin
 			onToolStripMenuItem.Checked = true;
 			offToolStripMenuItem.Checked = false;
 		}
-		//Выключить автозапуск при старте Windows
+
 		public void offToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			try
@@ -257,7 +251,7 @@ namespace NotifyBin
 				if (myKey.GetValue("NotifyBin").ToString() == Application.ExecutablePath)
 					myKey.DeleteValue("NotifyBin");
 			}
-			catch (NullReferenceException ex)
+			catch (NullReferenceException)
 			{
 				myKey.DeleteValue("NotifyBin");
 			}

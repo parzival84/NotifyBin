@@ -19,7 +19,6 @@ namespace NotifyBin
 
 
 
-		// Создает структуру, которая будет хранить информацию повторного запроса. 
 		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode, Pack = 1)]
 		public struct SHQUERYRBINFO
 		{
@@ -27,10 +26,8 @@ namespace NotifyBin
 			public UInt64 i64Size;
 			public UInt64 i64NumItems;
 		}
-		// Вызов метода SHQueryRecycleBin () библиотеки shell32 для запроса размера файла и номера файла в корзине.
 		[DllImport("shell32.dll", CharSet = CharSet.Unicode)]
 		public static extern int SHQueryRecycleBin([MarshalAs(UnmanagedType.LPTStr)]String pszRootPath,ref SHQUERYRBINFO pSHQueryRBInfo);
-		//Сколько сейчас данных в корзине
 		public void GetSize()
 		{
 			SHQUERYRBINFO bb_Query = new SHQUERYRBINFO();
@@ -38,10 +35,8 @@ namespace NotifyBin
 
 			SHQueryRecycleBin(null, ref bb_Query);
 			_cb_size = "CB Size  :  " + bb_Query.cbSize;
-			//Вызов элемента структуры i64NumItems, который вернет номер файла в корзине.
 			_num_items = bb_Query.i64NumItems + Language.Translate("files");
 			_num_itemsMB = Convert.ToInt32(bb_Query.i64NumItems);
-			//Вызов элемента структуры i64Size, который вернет размер корзины.
 			_file_size = bb_Query.i64Size + Language.Translate("byte");  
 			if (bb_Query.i64Size >= 1024)
 			{
@@ -53,12 +48,11 @@ namespace NotifyBin
 					if (bb_Query.i64Size >= 1073741824)
 					{
 						string sizeGB = (Convert.ToDouble(bb_Query.i64Size) / 1073741824).ToString();
-						_file_size = sizeGB.Substring(0, sizeGB.IndexOf(",") + 3) + Language.Translate("GB"); // Для дробного представления ГБ (1,65)
+						_file_size = sizeGB.Substring(0, sizeGB.IndexOf(",") + 3) + Language.Translate("GB");
 					}
 				}
 			}
 		}
-		//Сколько всего данных в корзине
 		public int GetMaxSize()
 		{
 			string ss = @"Software\Microsoft\Windows\CurrentVersion\Explorer\BitBucket\Volume";
