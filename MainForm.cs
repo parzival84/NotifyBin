@@ -139,22 +139,22 @@ namespace NotifyBin
 			switch (iconpersent)
 			{
 				case 0:
-					notify.Icon = Resources.OkIcon;//Иконка OK
+					notify.Icon = Resources.0;//Иконка OK
 					break;
 				case 25:
-					notify.Icon = Resources.NotIcon25;//Иконка 25%
+					notify.Icon = Resources.25;//Иконка 25%
 					break;
 				case 50:
-					notify.Icon = Resources.NotIcon50;//Иконка 50%
+					notify.Icon = Resources.50;//Иконка 50%
 					break;
 				case 75:
-					notify.Icon = Resources.NotIcon75;//Иконка 75%
+					notify.Icon = Resources.75;//Иконка 75%
 					break;
 				case 100:
-					notify.Icon = Resources.NotIcon100;//Иконка 100%
+					notify.Icon = Resources.100;//Иконка 100%
 					break;
 				default:
-					notify.Icon = Resources.DefaultIcon;
+					notify.Icon = Resources.0;
 					break;
 			}
 		}
