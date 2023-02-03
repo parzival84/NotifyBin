@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace NotifyBin
+namespace TrashBin
 {
 	public static class Language
 	{

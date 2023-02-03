@@ -1,5 +1,5 @@
 ﻿
-namespace NotifyBin
+namespace TrashBin
 {
 	partial class MainForm
 	{
@@ -164,7 +164,7 @@ namespace NotifyBin
 			// 
 			// englishToolStripMenuItem
 			// 
-			this.englishToolStripMenuItem.Image = global::NotifyBin.Properties.Resources.united_states_flag;
+			this.englishToolStripMenuItem.Image = global::TrashBin.Properties.Resources.united_states_flag;
 			this.englishToolStripMenuItem.Name = "englishToolStripMenuItem";
 			this.englishToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.englishToolStripMenuItem.Text = "English";
@@ -172,7 +172,7 @@ namespace NotifyBin
 			// 
 			// russianToolStripMenuItem
 			// 
-			this.russianToolStripMenuItem.Image = global::NotifyBin.Properties.Resources.russia_flag;
+			this.russianToolStripMenuItem.Image = global::TrashBin.Properties.Resources.russia_flag;
 			this.russianToolStripMenuItem.Name = "russianToolStripMenuItem";
 			this.russianToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.russianToolStripMenuItem.Text = "Russian";
@@ -219,7 +219,7 @@ namespace NotifyBin
 			this.Name = "MainForm";
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "NotifyBin";
+			this.Text = "TrashBin";
 			this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
 			this.Load += new System.EventHandler(this.MainForm_Load);
 			this.contextMenu.ResumeLayout(false);

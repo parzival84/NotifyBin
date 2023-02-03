@@ -1,5 +1,5 @@
 ﻿
-namespace NotifyBin
+namespace TrashBin
 {
 	partial class About
 	{

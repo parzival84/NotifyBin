@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{EA05DB3D-51B2-4021-B4C6-05336BEA8D19}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>NotifyBin</RootNamespace>
-    <AssemblyName>NotifyBin</AssemblyName>
+    <RootNamespace>TrashBin</RootNamespace>
+    <AssemblyName>TrashBin</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -48,7 +48,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Bin0.ico</ApplicationIcon>
+    <ApplicationIcon>Resources/Bin0.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
@@ -144,7 +144,6 @@
     <None Include="Resources\united-states-flag.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Bin0.ico" />
     <Content Include="Resources\Bin25.ico" />
     <Content Include="Resources\Bin50.ico" />
     <Content Include="Resources\Bin75.ico" />

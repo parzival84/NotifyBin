@@ -1,17 +1,17 @@
 ﻿using Microsoft.Win32;
-using NotifyBin.Properties;
+using TrashBin.Properties;
 using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace NotifyBin
+namespace TrashBin
 {
 	public partial class MainForm : Form
 	{
 		readonly RegistryKey myKey = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
-		readonly RegistryKey key = Registry.CurrentUser.CreateSubKey(@"Software\NotifyBin");
+		readonly RegistryKey key = Registry.CurrentUser.CreateSubKey(@"Software\TrashBin");
 		enum RecycleFlags : uint
 		{
 			SHRB_NOCONFIRMATION = 0x00000001,
@@ -232,12 +232,12 @@ namespace NotifyBin
 		{
 			try
 			{
-				if (myKey.GetValue("NotifyBin").ToString() != Application.ExecutablePath)
-					myKey.SetValue("NotifyBin", Application.ExecutablePath);
+				if (myKey.GetValue("TrashBin").ToString() != Application.ExecutablePath)
+					myKey.SetValue("TrashBin", Application.ExecutablePath);
 			}
 			catch (NullReferenceException)
 			{
-				myKey.SetValue("NotifyBin", Application.ExecutablePath);
+				myKey.SetValue("TrashBin", Application.ExecutablePath);
 			}
 			key.SetValue("Autostart", 1);
 			onToolStripMenuItem.Checked = true;
@@ -248,12 +248,12 @@ namespace NotifyBin
 		{
 			try
 			{
-				if (myKey.GetValue("NotifyBin").ToString() == Application.ExecutablePath)
-					myKey.DeleteValue("NotifyBin");
+				if (myKey.GetValue("TrashBin").ToString() == Application.ExecutablePath)
+					myKey.DeleteValue("TrashBin");
 			}
 			catch (NullReferenceException)
 			{
-				myKey.DeleteValue("NotifyBin");
+				myKey.DeleteValue("TrashBin");
 			}
 			key.SetValue("Autostart", 0);
 			onToolStripMenuItem.Checked = false;

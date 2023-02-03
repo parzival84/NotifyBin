@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанных со сборкой.
-[assembly: AssemblyTitle("NotifyBin")]
+[assembly: AssemblyTitle("TrashBin")]
 [assembly: AssemblyDescription("Recycle Bin in Notify Panel")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
