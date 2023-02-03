@@ -48,7 +48,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\DefaultIcon.ico</ApplicationIcon>
+    <ApplicationIcon>Bin0.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
@@ -177,6 +177,7 @@
     <None Include="Resources\united-states-flag.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Bin0.ico" />
     <Content Include="Resources\Bin25.ico" />
     <Content Include="Resources\Bin50.ico" />
     <Content Include="Resources\Bin75.ico" />
