@@ -15,7 +15,6 @@ namespace NotifyBin
         // a pre-existing process with the same name as the
         // current one, if any; or null if the current process
         // is unique.
-        //Не создает дубликаты процесса
         {
             Process curr = Process.GetCurrentProcess();
             Process[] procs = Process.GetProcessesByName(curr.ProcessName);
@@ -28,15 +27,12 @@ namespace NotifyBin
             return null;
         }
 
-        /// <summary>
-        /// Главная точка входа для приложения.
-        /// </summary>
+
         [STAThread]
 		static void Main()
 		{
             if (PriorProcess() != null)
             {
-
                 //MessageBox.Show("Another instance of the app is already running.");
                 return;
             }

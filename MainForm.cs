@@ -47,7 +47,7 @@ namespace NotifyBin
 			{
 				uint IsSuccess = SHEmptyRecycleBin(IntPtr.Zero, null, RecycleFlags.SHRB_NOCONFIRMATION);
 				GetNotifyData();
-				notify.BalloonTipTitle = "Notify Bin";
+				notify.BalloonTipTitle = "TrashBin";
 				notify.BalloonTipText = Language.Translate("BinClear");
 				notify.BalloonTipIcon = ToolTipIcon.Info;
 				notify.ShowBalloonTip(1000);
@@ -55,7 +55,7 @@ namespace NotifyBin
 			}
 			catch (Exception)
 			{
-				notify.BalloonTipTitle = "Notify Bin";
+				notify.BalloonTipTitle = "TrashBin";
 				notify.BalloonTipText = Language.Translate("BinNotClear");
 				notify.BalloonTipIcon = ToolTipIcon.Error;
 				notify.ShowBalloonTip(1000);
@@ -100,7 +100,7 @@ namespace NotifyBin
 			clearToolStripMenuItem.Enabled = false;
 			}
 			else { clearToolStripMenuItem.Enabled = true; }
-			notify.Text = "Notify Bin v1.11\n\n" + databin._num_items + "\n" + databin._file_size;
+			notify.Text = "TrashBin\n\n" + databin._num_items + "\n" + databin._file_size;
 
 			double sum = databin.GetMaxSize();
 			int iconpersent = 0;
